@@ -7,13 +7,18 @@
   - name: update repository index
     apt:
       update_cache: yes
+# if you have more than one condition use ( var in [cond1,cond2,...] )
+    when: ansible_distribution in ["Debian", "Ubuntu"] 
 
   - name: install the apache2 package
     apt:
       name: apache2
       state: latest
+# if you have only one condition use  ( var == cond )
+    when: ansible_distribution == "Ubuntu"
  
   - name: add php support for apache
     apt:
       name: libapache2-mod-php
       state: latest
+    when: ansible_distribution =="Ubuntu"
